@@ -2,22 +2,24 @@ package org.example.junit.lesson4;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class SecondClassTest {
 
-    @BeforeClass
-    public static void beforeClass(){
+    @BeforeAll
+    static void beforeClass(){
         System.out.println("Before SecondClassTest.class");
     }
 
-    @AfterClass
-    public static void afterClass(){
+    @AfterAll
+    static void afterClass(){
         System.out.println("After SecondClassTest.class");
     }
 
     @Test
-    public void test(){
+    void test(){
         System.out.println("JUNIT");
     }
 }

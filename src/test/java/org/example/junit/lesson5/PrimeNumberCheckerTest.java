@@ -1,7 +1,9 @@
 package org.example.junit.lesson5;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -21,19 +23,19 @@ public class PrimeNumberCheckerTest {
         this.resultValue = resultValue;
     }
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         numberChecker = new PrimeNumberChecker();
     }
 
     @Test
-    public void testPrimeNumberChecker() {
+    void testPrimeNumberChecker() {
         System.out.println("Parameterized number is = " + inputValue);
         assertEquals(resultValue, numberChecker.validate(inputValue));
     }
 
     @Parameterized.Parameters
-    public static Collection primeNumbers() {
+    static Collection primeNumbers() {
         return Arrays.asList(new Object[][]{
                 {2, true},
                 {6, false},
@@ -42,5 +44,4 @@ public class PrimeNumberCheckerTest {
                 {23, true},
         });
     }
-
 }

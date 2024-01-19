@@ -1,88 +1,88 @@
 package org.example.junit.lesson3;
 
 import org.hamcrest.CoreMatchers;
-import org.junit.Test;
+import org.hamcrest.MatcherAssert;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AssertionTest {
 
     @Test
-    public void whenAssertEquality_thenEqual() {
+    void whenAssertEquality_thenEqual() {
         String actual = "ITVDN";
         String expected = "ITVDN";
         String message = "Expected and actual not equal";
-        assertEquals(message, expected, actual);
+        assertEquals(expected, actual, message);
     }
 
     @Test
-    public void whenAssertionDoubleEquality_thenEqual() {
+    void whenAssertionDoubleEquality_thenEqual() {
         double actual = 0.34;
         double expected = 0.33;
-        double delta = 0.009;
+        double delta = 0.02;
         String message = "The difference betwen expected and actual more then delta" + delta;
-        assertEquals(message, expected, actual, delta);
+        assertEquals(expected, actual, delta, message);
     }
 
     @Test
-    public void WhenAssertionArrayEquality_thenEqual() {
+    void WhenAssertionArrayEquality_thenEqual() {
         char[] actual = {'J', 'u', 'n', 'i', 't'};
         char[] expected = "Junit".toCharArray();
-        assertArrayEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void givenNullArrays_whenAssertionArraysEquality_thenEqual() {
+    void givenNullArrays_whenAssertionArraysEquality_thenEqual() {
         int[] actual = null;
         int[] expected = null;
-
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void whenAssertionNull_thenTrue() {
+    void whenAssertionNull_thenTrue() {
         Object tested = null;
-        assertNull("Tested object should be null", tested);
+        assertNull(tested, "Tested object should be null");
     }
 
     @Test
-    public void whenAssertionNotNull_thenTrue() {
+    void whenAssertionNotNull_thenTrue() {
         Object tested = new Object();
-        assertNotNull("Tested object should be not ull", tested);
+        assertNotNull(tested, "Tested object should be not ull");
     }
 
     @Test
-    public void whenAssertionNotSameObject_ThenDifferent() {
+    void whenAssertionNotSameObject_ThenDifferent() {
         Object cat = new Object();
         Object dog = new Object();
         assertNotSame(cat, dog);
     }
 
     @Test
-    public void whenAssertionSameObject_ThenNotDifferent() {
+    void whenAssertionSameObject_ThenNotDifferent() {
         String actual = "TEST";
         String expected = new String("TEST").intern();
         assertSame(expected, actual);
     }
 
     @Test
-    public void whenAssertionCondition_ThenVerify() {
-        assertTrue("5 is greater then 4", 5 > 4);
-        assertFalse("5 is not greater then 6", 5 > 6);
+    void whenAssertionCondition_ThenVerify() {
+        String assertTrueMessage = "5 is greater then 4";
+        assertTrue(5 > 4, assertTrueMessage);
+        String assertFalseMessage = "5 is not greater then 6";
+        assertFalse(5 > 6, assertFalseMessage);
     }
 
     @Test
-    public void whenCheckingExceptionMessage_thenEqual() {
-        try {
-            methodThatShouldThrowException();
-            fail("Exeption not throw");
-        } catch (UnsupportedOperationException e) {
-            String exepted = "Operation not supported";
-            assertEquals(exepted, e.getMessage());
-        }
+    void whenCheckingExceptionMessage_thenEqual() {
+        UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class,
+                this::methodThatShouldThrowException, "Exception not throw");
+        String excepted = "Operation not supported";
+        assertEquals(excepted, exception.getMessage());
     }
 
     private void methodThatShouldThrowException() {
@@ -90,10 +90,8 @@ public class AssertionTest {
     }
 
     @Test
-    public void testAssertThatHasItems(){
+    void testAssertThatHasItems() {
         List<String> list = Arrays.asList("Java", "Kotlin", "Scala");
-        assertThat(list, CoreMatchers.hasItem("Java"));
+        MatcherAssert.assertThat(list, CoreMatchers.hasItem("Java"));
     }
-
-
 }

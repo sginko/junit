@@ -3,7 +3,7 @@ package org.example.junit.lesson5;
 import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
@@ -21,7 +21,7 @@ public class SageAdditionalUtilTest {
 //    @Parameters(method = "parametersToTestAdd")
 //    @Parameters (source = ProviderTestData.class)
     @FileParameters("src/test/resources/Parameters.csv")
-    public void whenWithAnnotationProviderParams_ThenSafeAdd(int a, int b, int result) {
+    void whenWithAnnotationProviderParams_ThenSafeAdd(int a, int b, int result) {
         assertEquals(result, util.safeAdd(a, b));
     }
 
